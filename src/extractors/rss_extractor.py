@@ -1,6 +1,11 @@
 """RSS/Atom feed extractor."""
 
-import feedparser
+try:
+    import feedparser
+    FEEDPARSER_AVAILABLE = True
+except ImportError:
+    FEEDPARSER_AVAILABLE = False
+
 import requests
 from typing import Dict, List, Any
 from datetime import datetime
@@ -15,6 +20,12 @@ class RSSExtractor(BaseExtractor):
         super().__init__(source_config, cache_manager)
         self.timeout = source_config.get("timeout", 30)
 
+        if not FEEDPARSER_AVAILABLE:
+            self.logger.warning(
+                "feedparser is not installed. RSS extraction will not work. "
+                "Install with: pip install feedparser"
+            )
+
     def fetch_content(self) -> List[Dict[str, Any]]:
         """
         Fetch and parse RSS/Atom feed.
@@ -22,6 +33,10 @@ class RSSExtractor(BaseExtractor):
         Returns:
             List of feed entries
         """
+        if not FEEDPARSER_AVAILABLE:
+            self.logger.error("feedparser is not installed. Cannot fetch RSS feeds.")
+            return []
+
         try:
             # Fetch the feed
             response = requests.get(self.url, timeout=self.timeout)
