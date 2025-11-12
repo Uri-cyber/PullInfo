@@ -1,0 +1,27 @@
+{
+  "api_key": "${MAKE_API_KEY}",
+  "team_id": "your-team-id",
+  "organization_id": "your-org-id",
+  "region": "us",
+  "scenarios": [
+    {
+      "scenario_id": "scenario-1-id",
+      "name": "Content Summary Processor",
+      "webhook_url": "https://hook.us1.make.com/your-webhook-url-1",
+      "enabled": true,
+      "content_types": ["rss", "web"]
+    },
+    {
+      "scenario_id": "scenario-2-id",
+      "name": "Email Content Processor",
+      "webhook_url": "https://hook.us1.make.com/your-webhook-url-2",
+      "enabled": true,
+      "content_types": ["email"]
+    }
+  ],
+  "settings": {
+    "timeout": 30,
+    "retry_attempts": 3,
+    "batch_size": 10
+  }
+}

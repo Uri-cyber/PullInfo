@@ -1,0 +1,54 @@
+{
+  "sources": [
+    {
+      "source_id": "tech_rss",
+      "type": "rss",
+      "url": "https://example.com/feed.xml",
+      "check_interval": 3600,
+      "enabled": true,
+      "priority": "high",
+      "description": "Technology news RSS feed"
+    },
+    {
+      "source_id": "news_rss",
+      "type": "rss",
+      "url": "https://example.com/news/feed.xml",
+      "check_interval": 7200,
+      "enabled": true,
+      "priority": "medium",
+      "description": "General news RSS feed"
+    },
+    {
+      "source_id": "gmail_important",
+      "type": "email",
+      "url": "gmail://INBOX/Important",
+      "check_interval": 1800,
+      "enabled": false,
+      "priority": "high",
+      "description": "Important Gmail messages",
+      "filters": {
+        "label": "Important",
+        "from": []
+      }
+    },
+    {
+      "source_id": "web_blog",
+      "type": "web",
+      "url": "https://example.com/blog",
+      "check_interval": 86400,
+      "enabled": true,
+      "priority": "low",
+      "description": "Blog updates",
+      "selectors": {
+        "content": "article.main-content",
+        "title": "h1.article-title"
+      }
+    }
+  ],
+  "global_settings": {
+    "max_concurrent": 5,
+    "default_interval": 3600,
+    "retry_attempts": 3,
+    "timeout": 30
+  }
+}
